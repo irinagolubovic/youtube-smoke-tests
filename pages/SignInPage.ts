@@ -1,12 +1,11 @@
 import { Locator, Page } from "@playwright/test";
+import { BasePage } from "./BasePage";
 
-export class SignInPage {
-    readonly page: Page;
-
+export class SignInPage extends BasePage {
     readonly emailInput: Locator;
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
 
         this.emailInput = page.locator('#identifierId');
     }

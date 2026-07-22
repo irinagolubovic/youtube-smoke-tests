@@ -1,11 +1,8 @@
-import test, { expect } from "@playwright/test";
-import { HomePage } from "../pages/HomePage";
-import { SignInPage } from "../pages/SignInPage";;
+import { test, expect } from "./BaseTest";
 
-test.describe("TS-04 Sign In Page Accessibillity", () => {
-    test("TC-004 Verify user can open sign-in page", async ({page}) => {
-        const homePage = new HomePage(page);
-        const signInPage = new SignInPage(page);
+
+test.describe("Sign In Page Accessibillity", () => {
+    test("Verify user can open sign-in page", async ({ homePage, page, signInPage }) => {
 
         await test.step("Open youtube homepage", async() => {
             await homePage.open();

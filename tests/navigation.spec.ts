@@ -1,13 +1,8 @@
-import { test, expect } from "@playwright/test";
-import { NavigationPage } from '../pages/NavigationPage';
-import { HomePage } from "../pages/HomePage";
+import { test, expect } from './BaseTest';
 
 
-test.describe('TS-02 Navigation Validation', () => {
-    test('TC-002 Verify user can navigate to Explore and return to homepage', async ({page}) => {
-        const navigationPage = new NavigationPage(page);
-        const homePage = new HomePage(page);
-
+test.describe('Navigation Validation', () => {
+    test('Verify user can navigate to Explore and return to homepage', async ({page, homePage, navigationPage}) => {
 
         await test.step('Open the YouTube homepage', async () => {
             await homePage.open();

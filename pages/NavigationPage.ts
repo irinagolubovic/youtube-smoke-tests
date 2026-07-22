@@ -1,15 +1,13 @@
 import { Locator, Page } from "@playwright/test";
+import { BasePage } from "./BasePage";
 
-
-export class NavigationPage {
-  readonly page: Page;
-
+export class NavigationPage extends BasePage{
   readonly exploreMenu: Locator;
   readonly shortsLink: Locator;
   readonly logoButton: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
 
     this.exploreMenu = page.locator('#guide-button').first();
     this.shortsLink = page.getByRole('link', { name: 'Shorts' }).first();

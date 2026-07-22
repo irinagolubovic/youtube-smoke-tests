@@ -1,19 +1,13 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './BaseTest';
 import { testData } from '../pages/test-data/testData';
-import { HomePage } from '../pages/HomePage';
-import { SearchResultsPage } from '../pages/SearchResultsPage';
 
-test.describe('TS-01 Homepage Loading and Search Validation', () => {
-  test('TC-001 Verify homepage loads successfully and user can search for videos', async ({
-    page,
-  }) => {
-    const homePage = new HomePage(page);
-    const searchResultsPage = new SearchResultsPage(page);
+test.describe('Homepage Loading and Search Validation', () => {
+  test('Verify homepage loads successfully and user can search for videos', async ({ page, homePage, searchResultsPage }) => {
 
     await test.step('Open the YouTube homepage', async () => {
       await homePage.open();
 
-      await expect(page).toHaveTitle(/YouTube/i); //nigga what?
+      await expect(page).toHaveTitle(/YouTube/i); 
       await expect(homePage.youtubeLogo).toBeVisible();
       await expect(homePage.searchInput).toBeVisible();
       await expect(homePage.searchButton).toBeVisible();
