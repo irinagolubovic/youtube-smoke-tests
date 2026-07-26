@@ -1,30 +1,14 @@
-import { test, expect } from './BaseTest';
+import { test } from './BaseTest';
 
+test('User can open Shorts and return home', async ({ homePage, navigationPage }) => {
+    await homePage.open();
+    await homePage.assertHomepageLoaded();
 
-test.describe('Navigation Validation', () => {
-    test('Verify user can navigate to Explore and return to homepage', async ({page, homePage, navigationPage}) => {
+    await navigationPage.assertMainNavigationDisplayed();
+    await navigationPage.openShorts();
+    await navigationPage.assertShortsOpened();
+    await navigationPage.returnToHomepage();
+    await navigationPage.assertHomepageOpened();
 
-        await test.step('Open the YouTube homepage', async () => {
-            await homePage.open();
-            await expect(page).toHaveURL('https://www.youtube.com/');
-        })
-
-        await test.step('Navigate to the Explore section', async () => {
-            await navigationPage.openExploreMenu();
-            await expect(navigationPage.shortsLink).toBeVisible();
-        })
-
-        await test.step('Navigate to Shorts section', async () => {
-            await navigationPage.openShorts();
-            await expect(page).toHaveURL(/\/shorts(\/|$)/);
-        })
-
-        await test.step('Return to homepage', async () => {
-            await navigationPage.returnToHomepage();
-            await expect(page).toHaveURL('https://www.youtube.com/');
-        })
-    })
-
-
-
-})
+    await homePage.assertHomepageLoaded();
+});

@@ -1,23 +1,19 @@
-import { Page } from '@playwright/test';
+import { type Page } from '@playwright/test';
 
 export class BasePage {
     protected readonly page: Page;
 
-    constructor (page: Page) {
+    constructor(page: Page) {
         this.page = page;
     }
 
-    async navigateTo (url: string) {
-       await this.page.goto(url, {
-        waitUntil: 'domcontentloaded'
-       });
+    async navigateTo(url: string) {
+        await this.page.goto(url, {
+            waitUntil: 'domcontentloaded',
+        });
     }
 
     async waitForPageToLoad() {
         await this.page.waitForLoadState('domcontentloaded');
-    }
-
-    async getCurrentUrl() {
-        return this.page.url();
     }
 }

@@ -6,7 +6,7 @@ import { SearchResultsPage } from '../pages/SearchResultsPage';
 import { SignInPage } from '../pages/SignInPage';
 import { VideoPage } from '../pages/VideoPage';
 
-type Fixtures = {
+type PageFixtures = {
     homePage: HomePage;
     navigationPage: NavigationPage;
     searchResultsPage: SearchResultsPage;
@@ -14,7 +14,7 @@ type Fixtures = {
     videoPage: VideoPage;
 };
 
-const test = base.extend<Fixtures>({
+export const test = base.extend<PageFixtures>({
     homePage: async ({ page }, use) => {
         await use(new HomePage(page));
     },
@@ -36,4 +36,15 @@ const test = base.extend<Fixtures>({
     },
 });
 
-export { test, expect };
+test.beforeEach(async ({ page }) => {
+    await page.goto('/', {
+        waitUntil: 'domcontentloaded',
+    });
+});
+
+test.afterEach(async () => {
+    console.log('Smoke test completed');
+});
+
+
+export { expect };

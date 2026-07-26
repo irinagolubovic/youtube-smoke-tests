@@ -1,32 +1,40 @@
-import { type Locator, type Page } from '@playwright/test';
+import {
+    expect,
+    type Locator,
+    type Page,
+} from '@playwright/test';
+
 import { BasePage } from './BasePage';
 
-export class SearchResultsPage extends BasePage{
+export class SearchResultsPage extends BasePage {
     readonly videoResults: Locator;
-    readonly videoTitles: Locator;
-    readonly videoThumbnails: Locator;
+    readonly firstVideoResult: Locator;
+    readonly firstVideoTitle: Locator;
 
-    constructor(page:  Page) {
+    constructor(page: Page) {
         super(page);
 
         this.videoResults = page.locator('ytd-video-renderer');
-        this.videoTitles = this.videoResults.locator('a#video-title');
-        this.videoThumbnails = this.videoResults.locator('a#thumbnail');
+        this.firstVideoResult = this.videoResults.first();
+        this.firstVideoTitle = this.firstVideoResult.locator('#video-title').first();
     }
 
     getFirstVideoResult() {
-        return this.videoResults.first();
+        return this.firstVideoResult;
     }
 
     getFirstVideoTitle() {
-        return this.videoTitles.first();
+        return this.firstVideoTitle;
     }
 
-    getFirstVideoThumbnail() {
-        return this.videoThumbnails.first();
+    async assertSearchResultsDisplayed() {
+        await expect(this.page).toHaveURL(/\/results\?search_query=/);
+        await expect(this.firstVideoResult).toBeVisible();
+        await expect(this.firstVideoTitle).toBeVisible();
     }
 
     async openFirstVideo() {
-    await this.getFirstVideoTitle().click();
-}
+        await expect(this.firstVideoTitle).toBeVisible();
+        await this.firstVideoTitle.click();
+        await expect(this.page).toHaveURL(/\/watch\?v=/,);}
 }
