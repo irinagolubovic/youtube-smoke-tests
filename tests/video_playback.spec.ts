@@ -1,6 +1,8 @@
 import { test } from './BaseTest';
 import { testData } from '../pages/test-data/testData';
 
+test.skip(!!process.env.CI, 'Skipped on CI: YouTube blocks watch page with bot-check on CI IPs');
+
 test('User can open a video', async ({ homePage, searchResultsPage, videoPage }) => {
     await homePage.open();
     await homePage.assertHomepageLoaded();

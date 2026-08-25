@@ -35,6 +35,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
   baseURL: 'https://www.youtube.com',
+   viewport: { width: 1280, height: 720 },
   trace: 'on-first-retry',
   screenshot: 'only-on-failure',
   video: 'retain-on-failure',
