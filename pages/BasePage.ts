@@ -7,13 +7,13 @@ export class BasePage {
         this.page = page;
     }
 
-    async navigateTo(url: string) {
+    async navigateTo(url: string){
         await this.page.goto(url, {
             waitUntil: 'domcontentloaded',
         });
     }
 
-    async waitForPageToLoad() {
-        await this.page.waitForLoadState('domcontentloaded');
-    }
+    // async waitForPageToLoad() {
+    //     await this.page.waitForLoadState('domcontentloaded');
+    // }
 }

@@ -14,6 +14,8 @@ type PageFixtures = {
     videoPage: VideoPage;
 };
 
+//kreireamo page objecte i ubacujemo u spec fajlove da ne bi morali to raditi u svakom fajlu ponaosob
+//svaki test dobija page object dependencies 
 export const test = base.extend<PageFixtures>({
     homePage: async ({ page }, use) => {
         await use(new HomePage(page));

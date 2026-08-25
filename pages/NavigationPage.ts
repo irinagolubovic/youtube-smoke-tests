@@ -40,7 +40,7 @@ export class NavigationPage extends BasePage {
             this.page.waitForURL(/^https:\/\/www\.youtube\.com\/?$/),
             this.homeLink.click(),
         ]);
-}
+    }
 
     async assertHomepageOpened() {
         await expect(this.page).toHaveURL(
